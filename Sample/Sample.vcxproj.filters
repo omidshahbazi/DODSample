@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Common">
+      <UniqueIdentifier>{2c272824-a77e-45e9-8468-db25b8adfec4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application">
+      <UniqueIdentifier>{20a7a005-7366-4021-8866-b53bad5dceb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OOD">
+      <UniqueIdentifier>{9cbfa8c5-8326-4fd7-823d-e5c66326850f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DOD">
+      <UniqueIdentifier>{1e4a3e4f-01c0-4336-8d24-5688b0245bff}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Application\Main.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
