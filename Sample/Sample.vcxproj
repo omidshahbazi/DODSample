@@ -20,6 +20,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application\Main.cpp" />
+    <ClCompile Include="Common\Renderer.cpp" />
+    <ClCompile Include="DOD\DODSimulation.cpp" />
+    <ClCompile Include="OOD\OODSimulation.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Application\Simulation.h" />
+    <ClInclude Include="Common\Renderer.h" />
+    <ClInclude Include="Common\Vector2.h" />
+    <ClInclude Include="DOD\DODAnt.h" />
+    <ClInclude Include="DOD\DODSimulation.h" />
+    <ClInclude Include="OOD\OODAnt.h" />
+    <ClInclude Include="OOD\OODSimulation.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -86,8 +98,11 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Libraries\SDL2-2.0.9\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Libraries\SDL2-2.0.9\include;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <Link>
+      <AdditionalDependencies>$(SolutionDir)Libraries\SDL2-2.0.9\lib\x86\SDL2.lib;$(SolutionDir)Libraries\SDL2-2.0.9\lib\x86\SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -95,8 +110,11 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Libraries\SDL2-2.0.9\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Libraries\SDL2-2.0.9\include;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <Link>
+      <AdditionalDependencies>$(SolutionDir)Libraries\SDL2-2.0.9\lib\x64\SDL2.lib;$(SolutionDir)Libraries\SDL2-2.0.9\lib\x64\SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>

@@ -13,10 +13,45 @@
     <Filter Include="DOD">
       <UniqueIdentifier>{1e4a3e4f-01c0-4336-8d24-5688b0245bff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="OOD.Optimized">
+      <UniqueIdentifier>{f3b91a57-8e52-4845-8ff8-5b4a34c690fd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application\Main.cpp">
       <Filter>Application</Filter>
     </ClCompile>
+    <ClCompile Include="Common\Renderer.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="OOD\OODSimulation.cpp">
+      <Filter>OOD</Filter>
+    </ClCompile>
+    <ClCompile Include="DOD\DODSimulation.cpp">
+      <Filter>DOD</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Common\Renderer.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Simulation.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Vector2.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="OOD\OODAnt.h">
+      <Filter>OOD</Filter>
+    </ClInclude>
+    <ClInclude Include="OOD\OODSimulation.h">
+      <Filter>OOD</Filter>
+    </ClInclude>
+    <ClInclude Include="DOD\DODAnt.h">
+      <Filter>DOD</Filter>
+    </ClInclude>
+    <ClInclude Include="DOD\DODSimulation.h">
+      <Filter>DOD</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
