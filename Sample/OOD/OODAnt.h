@@ -2,6 +2,8 @@
 #pragma once
 #include <Common\Vector2.h>
 
+class Renderer;
+
 class OODAnt
 {
 public:
@@ -10,11 +12,9 @@ public:
 	{
 	}
 
-	void Update(void)
-	{
-		m_Position.X++;
-		m_Position.Y++;
-	}
+	void Update(void);
+
+	void Render(Renderer *Renderer);
 
 	const Vector2F &GetPosition(void) const
 	{

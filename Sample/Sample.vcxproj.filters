@@ -30,6 +30,12 @@
     <ClCompile Include="DOD\DODSimulation.cpp">
       <Filter>DOD</Filter>
     </ClCompile>
+    <ClCompile Include="OOD\OODAnt.cpp">
+      <Filter>OOD</Filter>
+    </ClCompile>
+    <ClCompile Include="DOD\DODAnt.cpp">
+      <Filter>DOD</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Renderer.h">
@@ -52,6 +58,9 @@
     </ClInclude>
     <ClInclude Include="DOD\DODSimulation.h">
       <Filter>DOD</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Utils.h">
+      <Filter>Common</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

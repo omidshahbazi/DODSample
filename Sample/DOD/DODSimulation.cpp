@@ -18,13 +18,7 @@ void DODSimulation::Update(void)
 {
 	DODAnt *ants = &m_Ants[0];
 
-	for (int i = 0; i < GetAntCount(); ++i)
-	{
-		DODAnt &ant = ants[i];
+	DODAntsLogic::UpdateDODAnts(ants, GetAntCount());
 
-		ant.Position.X++;
-		ant.Position.Y++;
-
-		GetRenderer()->SetPixel(ant.Position.X, ant.Position.Y);
-	}
+	DODAntsLogic::RenderDODAnts(ants, GetAntCount(), GetRenderer());
 }

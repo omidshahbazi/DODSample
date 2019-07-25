@@ -21,6 +21,6 @@ void OODSimulation::Update(void)
 
 		ant->Update();
 
-		GetRenderer()->SetPixel(ant->GetPosition().X, ant->GetPosition().Y);
+		ant->Render(GetRenderer());
 	}
 }

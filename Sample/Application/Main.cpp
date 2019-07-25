@@ -1,37 +1,13 @@
 // DOD Sample
 #include <Common\Renderer.h>
+#include <Common\Utils.h>
 #include <OOD\OODSimulation.h>
 #include <DOD\DODSimulation.h>
-#include <Windows.h>
 #include <iostream>
 
 const int WINDOW_WIDTH = 1000;
 const int WINDOW_HEIGHT = 1000;
 const int ANT_COUNT = 1000;
-
-long GetFrequency(void)
-{
-	LARGE_INTEGER var;
-	QueryPerformanceFrequency(&var);
-	return var.QuadPart;
-}
-
-float GetTimestamp(void)
-{
-	static long frequency = GetFrequency();
-
-	LARGE_INTEGER clock;
-	QueryPerformanceCounter(&clock);
-
-	return (float(clock.QuadPart * 1000000) / frequency) / 1000000;
-}
-
-float GetTime(void)
-{
-	static float start = GetTimestamp();
-
-	return GetTimestamp() - start;
-}
 
 void main(void)
 {
@@ -41,7 +17,9 @@ void main(void)
 	OODSimulation simulation(&renderer, ANT_COUNT);
 	//DODSimulation simulation(&renderer, ANT_COUNT);
 
-	float lastCountTime = GetTime();
+	std::cout << simulation.GetName() << " is running" << std::endl;
+
+	float lastCountTime = Utils::GetTime();
 	unsigned int frameCount = 0;
 	float lastTime = 0.0F;
 	float totalFrameTime = 0.0F;
@@ -49,7 +27,7 @@ void main(void)
 
 	while (renderer.IsWindowOpen())
 	{
-		float nowTime = GetTime();
+		float nowTime = Utils::GetTime();
 
 		simulation.Update();
 
