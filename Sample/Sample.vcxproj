@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="Application\Main.cpp" />
     <ClCompile Include="Common\Renderer.cpp" />
+    <ClCompile Include="DOD.Multithreaded\DOD.MultithreadedSimulation.cpp" />
     <ClCompile Include="DOD\DODAnt.cpp" />
     <ClCompile Include="DOD\DODSimulation.cpp" />
     <ClCompile Include="OOD\OODAnt.cpp" />
@@ -31,6 +32,7 @@
     <ClInclude Include="Common\Renderer.h" />
     <ClInclude Include="Common\Utils.h" />
     <ClInclude Include="Common\Vector2.h" />
+    <ClInclude Include="DOD.Multithreaded\DOD.MultithreadedSimulation.h" />
     <ClInclude Include="DOD\DODAnt.h" />
     <ClInclude Include="DOD\DODSimulation.h" />
     <ClInclude Include="OOD\OODAnt.h" />
@@ -88,12 +90,19 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)Binaries\$(Platform)</OutDir>
-    <IntDir>$(Platform)\$(Configuration)</IntDir>
+    <OutDir>$(SolutionDir)Binaries\$(Platform)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IntDir>$(Platform)\$(Configuration)</IntDir>
-    <OutDir>$(SolutionDir)Binaries\$(Platform)</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)Binaries\$(Platform)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)Binaries\$(Platform)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)Binaries\$(Platform)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -127,10 +136,12 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Libraries\SDL2-2.0.9\include;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>$(SolutionDir)Libraries\SDL2-2.0.9\lib\x86\SDL2.lib;$(SolutionDir)Libraries\SDL2-2.0.9\lib\x86\SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -141,10 +152,12 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Libraries\SDL2-2.0.9\include;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>$(SolutionDir)Libraries\SDL2-2.0.9\lib\x86\SDL2.lib;$(SolutionDir)Libraries\SDL2-2.0.9\lib\x86\SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -4,17 +4,20 @@
 
 class Renderer;
 
-struct DODAnt
+struct DODAntData
 {
 public:
 	Vector2F Position;
-	Vector2F Target;
+	Vector2F Step;
+	int StepCount;
 };
 
 class DODAntsLogic
 {
 public:
-	static void UpdateDODAnts(DODAnt *Ants, int Count);
+	static void Update(DODAntData *Data, int Index, int Count);
 
-	static void RenderDODAnts(DODAnt *Ants, int Count, Renderer *Renderer);
+	static void Render(DODAntData *Data, int Count, Renderer *Renderer);
+
+	static void FindNewTarget(DODAntData &Data);
 };

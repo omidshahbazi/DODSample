@@ -9,13 +9,15 @@ class OODSimulation : public Simulation
 public:
 	OODSimulation(Renderer *Renderer, int AntCount);
 
-	void Update(void) override;
+	virtual void Update(void) override;
+
+	virtual void Render(void) override;
 
 	const char *GetName(void) override
 	{
 		return "OOD Simulation";
 	}
 
-private:
+protected:
 	std::vector<OODAnt*> m_Ants;
 };

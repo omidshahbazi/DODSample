@@ -16,6 +16,9 @@
     <Filter Include="OOD.Optimized">
       <UniqueIdentifier>{f3b91a57-8e52-4845-8ff8-5b4a34c690fd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DOD.Multithreaded">
+      <UniqueIdentifier>{8c41dfd8-10d5-4d7c-a740-ead6bc28225e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application\Main.cpp">
@@ -35,6 +38,9 @@
     </ClCompile>
     <ClCompile Include="DOD\DODAnt.cpp">
       <Filter>DOD</Filter>
+    </ClCompile>
+    <ClCompile Include="DOD.Multithreaded\DOD.MultithreadedSimulation.cpp">
+      <Filter>DOD.Multithreaded</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -61,6 +67,9 @@
     </ClInclude>
     <ClInclude Include="Common\Utils.h">
       <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="DOD.Multithreaded\DOD.MultithreadedSimulation.h">
+      <Filter>DOD.Multithreaded</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

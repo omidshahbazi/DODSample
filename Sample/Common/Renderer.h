@@ -7,7 +7,9 @@ public:
 	void Initialize(const char *Title, int Width, int Heigth);
 	void Shutdown(void);
 
-	void Render(void);
+	void Clear(void);
+
+	void Present(void);
 
 	void SetPixel(int X, int Y);
 

@@ -1,24 +1,28 @@
 // DOD Sample
 #include <DOD\DODSimulation.h>
 #include <Common\Renderer.h>
+#include <Common\Utils.h>
 
 DODSimulation::DODSimulation(Renderer *Renderer, int AntCount) :
 	Simulation(Renderer, AntCount)
 {
 	for (int i = 0; i < AntCount; ++i)
 	{
-		DODAnt ant;
-		ant.Position = GetRandom(0, 100, 0, 100);
+		DODAntData data;
 
-		m_Ants.push_back(ant);
+		data.Position = Utils::GetRandom(0, Utils::WIDTH, 0, Utils::HEIGHT);
+		DODAntsLogic::FindNewTarget(data);
+
+		m_AntsData.push_back(data);
 	}
 }
 
 void DODSimulation::Update(void)
 {
-	DODAnt *ants = &m_Ants[0];
+	DODAntsLogic::Update(&m_AntsData[0], 0, GetAntCount());
+}
 
-	DODAntsLogic::UpdateDODAnts(ants, GetAntCount());
-
-	DODAntsLogic::RenderDODAnts(ants, GetAntCount(), GetRenderer());
+void DODSimulation::Render(void)
+{
+	DODAntsLogic::Render(&m_AntsData[0], GetAntCount(), GetRenderer());
 }

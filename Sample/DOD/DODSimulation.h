@@ -9,13 +9,15 @@ class DODSimulation : public Simulation
 public:
 	DODSimulation(Renderer *Renderer, int AntCount);
 
-	void Update(void) override;
+	virtual void Update(void) override;
+
+	virtual void Render(void) override;
 
 	const char *GetName(void) override
 	{
 		return "DOD Simulation";
 	}
 
-private:
-	std::vector<DODAnt> m_Ants;
+protected:
+	std::vector<DODAntData> m_AntsData;
 };
