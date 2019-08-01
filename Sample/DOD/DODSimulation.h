@@ -1,6 +1,6 @@
 // DOD Sample
 #pragma once
-#include <Application\Simulation.h>
+#include <Common\Simulation.h>
 #include <DOD\DODAnt.h>
 #include <vector>
 

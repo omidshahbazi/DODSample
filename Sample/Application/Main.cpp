@@ -2,8 +2,9 @@
 #include <Common\Renderer.h>
 #include <Common\Utils.h>
 #include <OOD\OODSimulation.h>
+#include <OOD.Optimized\OODSimulation.Optimized.h>
 #include <DOD\DODSimulation.h>
-#include <DOD.Multithreaded\DOD.MultithreadedSimulation.h>
+#include <DOD.Multithreaded\DODSimulation.Multithreaded.h>
 
 #define DECLARE_FPS_COUNTER() \
 	unsigned int frameCount = 0; \
@@ -120,8 +121,10 @@ void main(void)
 	renderer.Initialize("DOD Sample", Utils::WIDTH, Utils::HEIGHT);
 
 	//OODSimulation simulation(&renderer, Utils::ANT_COUNT);
+	//OODSimulationOptimized simulation(&renderer, Utils::ANT_COUNT);
 	DODSimulation simulation(&renderer, Utils::ANT_COUNT);
-	//DODMultithreadedSimulation simulation(&renderer, Utils::ANT_COUNT);
+
+	//DODSimulationMultithreaded simulation(&renderer, Utils::ANT_COUNT);
 
 	std::cout << simulation.GetName() << " is running for " << Utils::ANT_COUNT << " ant(s)" << std::endl << std::endl;
 

@@ -39,22 +39,22 @@
     <ClCompile Include="DOD\DODAnt.cpp">
       <Filter>DOD</Filter>
     </ClCompile>
-    <ClCompile Include="DOD.Multithreaded\DOD.MultithreadedSimulation.cpp">
+    <ClCompile Include="DOD.Multithreaded\DODSimulation.Multithreaded.cpp">
       <Filter>DOD.Multithreaded</Filter>
+    </ClCompile>
+    <ClCompile Include="OOD.Optimized\OODAnt.Optimized.cpp">
+      <Filter>OOD.Optimized</Filter>
+    </ClCompile>
+    <ClCompile Include="OOD.Optimized\OODSimulation.Optimized.cpp">
+      <Filter>OOD.Optimized</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Renderer.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="Application\Simulation.h">
-      <Filter>Application</Filter>
-    </ClInclude>
     <ClInclude Include="Common\Vector2.h">
       <Filter>Common</Filter>
-    </ClInclude>
-    <ClInclude Include="OOD\OODAnt.h">
-      <Filter>OOD</Filter>
     </ClInclude>
     <ClInclude Include="OOD\OODSimulation.h">
       <Filter>OOD</Filter>
@@ -68,8 +68,20 @@
     <ClInclude Include="Common\Utils.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="DOD.Multithreaded\DOD.MultithreadedSimulation.h">
+    <ClInclude Include="DOD.Multithreaded\DODSimulation.Multithreaded.h">
       <Filter>DOD.Multithreaded</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Simulation.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="OOD\OODAnt.h">
+      <Filter>OOD</Filter>
+    </ClInclude>
+    <ClInclude Include="OOD.Optimized\OODAnt.Optimized.h">
+      <Filter>OOD.Optimized</Filter>
+    </ClInclude>
+    <ClInclude Include="OOD.Optimized\OODSimulation.Optimized.h">
+      <Filter>OOD.Optimized</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

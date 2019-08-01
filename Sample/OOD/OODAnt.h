@@ -18,20 +18,16 @@ public:
 
 	void Render(Renderer *Renderer);
 
-	void FindNewTarget(void);
-
 	const Vector2F &GetPosition(void) const
 	{
 		return m_Position;
 	}
 
-	const Vector2F &GetStep(void) const
-	{
-		return m_Step;
-	}
+private:
+	void FindNewTarget(void);
 
 private:
 	Vector2F m_Position;
-	Vector2F m_Step;
+	Vector2F m_Target;
 	int m_StepCount;
 };
