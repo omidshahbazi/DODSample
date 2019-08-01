@@ -1,5 +1,5 @@
 // DOD Sample
-//#define NO_RENDER
+#define NO_RENDER
 
 #include <Common\Renderer.h>
 #include <SDL.h>

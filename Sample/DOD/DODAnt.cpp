@@ -6,7 +6,6 @@
 
 void DODAntsLogic::Update(DODAntData *Data, int Index, int Count)
 {
-	float time = Utils::GetTime();
 	for (int i = Index; i < Index + Count; ++i)
 	{
 		DODAntData &antData = Data[i];
