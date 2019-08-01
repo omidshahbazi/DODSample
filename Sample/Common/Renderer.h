@@ -18,6 +18,11 @@ public:
 		return m_IsWindowOpen;
 	}
 
+	void SetIsWindowOpen(bool Value)
+	{
+		m_IsWindowOpen = true;
+	}
+
 private:
 	bool m_IsWindowOpen;
 };

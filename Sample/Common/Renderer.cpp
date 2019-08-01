@@ -1,5 +1,5 @@
 // DOD Sample
-#define NO_RENDER
+//#define NO_RENDER
 
 #include <Common\Renderer.h>
 #include <SDL.h>
@@ -54,6 +54,10 @@ void Renderer::Present(void)
 		case SDL_QUIT:
 			m_IsWindowOpen = false;
 			break;
+
+		case SDL_KEYUP:
+			if (e.key.keysym.sym == SDLK_SPACE)
+				m_IsWindowOpen = false;
 		}
 	}
 
