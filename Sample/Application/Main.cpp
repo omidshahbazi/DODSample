@@ -120,9 +120,9 @@ void main(void)
 	Renderer renderer;
 	renderer.Initialize("DOD Sample", Utils::WIDTH, Utils::HEIGHT);
 
-	//OODSimulation simulation(&renderer, Utils::ANT_COUNT);
+	OODSimulation simulation(&renderer, Utils::ANT_COUNT);
 	//OODSimulationOptimized simulation(&renderer, Utils::ANT_COUNT);
-	DODSimulation simulation(&renderer, Utils::ANT_COUNT);
+	//DODSimulation simulation(&renderer, Utils::ANT_COUNT);
 
 	//DODSimulationMultithreaded simulation(&renderer, Utils::ANT_COUNT);
 
