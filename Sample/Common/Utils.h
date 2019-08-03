@@ -4,7 +4,6 @@
 #include <random>
 #include <Common\Vector2.h>
 #include <iostream>
-#include <intrin.h>
 
 class Utils
 {
