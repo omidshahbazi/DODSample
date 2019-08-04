@@ -4,13 +4,14 @@
 #include <Common\Utils.h>
 
 OODSimulationOptimized::OODSimulationOptimized(Renderer *Renderer, int AntCount) :
-	Simulation(Renderer, AntCount)
+	Simulation(Renderer, AntCount),
+	m_Ants(nullptr)
 {
+	m_Ants = reinterpret_cast<OODAntOptimized*>(malloc(sizeof(OODAntOptimized) * AntCount));
+
 	for (int i = 0; i < AntCount; ++i)
 	{
-		OODAntOptimized *ant = new OODAntOptimized(Utils::GetRandom(0, Utils::WIDTH, 0, Utils::HEIGHT));
-
-		m_Ants.push_back(ant);
+		new (&m_Ants[i]) OODAntOptimized(Utils::GetRandom(0, Utils::WIDTH, 0, Utils::HEIGHT));
 	}
 }
 
@@ -18,7 +19,7 @@ void OODSimulationOptimized::Update(void)
 {
 	for (int i = 0; i < GetAntCount(); ++i)
 	{
-		m_Ants[i]->Update();
+		m_Ants[i].Update();
 	}
 }
 
@@ -26,6 +27,6 @@ void OODSimulationOptimized::Render(void)
 {
 	for (int i = 0; i < GetAntCount(); ++i)
 	{
-		m_Ants[i]->Render(GetRenderer());
+		m_Ants[i].Render(GetRenderer());
 	}
 }

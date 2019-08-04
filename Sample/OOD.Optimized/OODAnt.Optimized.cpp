@@ -7,7 +7,7 @@ void OODAntOptimized::Update(void)
 {
 	m_Position += m_Step;
 
-	if (m_StepCount-- == 0)
+	if (--m_StepCount == 0)
 		FindNewTarget();
 }
 

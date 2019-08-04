@@ -7,7 +7,7 @@ void OODAnt::Update(void)
 {
 	m_Position += (m_Target - m_Position) / m_StepCount;
 
-	if (m_StepCount-- == 0)
+	if (--m_StepCount == 0)
 		FindNewTarget();
 }
 

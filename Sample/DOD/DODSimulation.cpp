@@ -4,16 +4,17 @@
 #include <Common\Utils.h>
 
 DODSimulation::DODSimulation(Renderer *Renderer, int AntCount) :
-	Simulation(Renderer, AntCount)
+	Simulation(Renderer, AntCount),
+	m_AntsData(nullptr)
 {
+	m_AntsData = reinterpret_cast<DODAntData*>(malloc(sizeof(DODAntData) * AntCount));
+
 	for (int i = 0; i < AntCount; ++i)
 	{
-		DODAntData data;
+		DODAntData &data = m_AntsData[i];
 
 		data.Position = Utils::GetRandom(0, Utils::WIDTH, 0, Utils::HEIGHT);
 		DODAntsLogic::FindNewTarget(data);
-
-		m_AntsData.push_back(data);
 	}
 }
 

@@ -10,9 +10,9 @@ class Utils
 public:
 	static const int WIDTH = 800;
 	static const int HEIGHT = 600;
-	static const int MIN_STEP_COUNT = 100;
-	static const int MAX_STEP_COUNT = 400;
-	static const int ANT_COUNT = 1000000;
+	static const int MIN_STEP_COUNT = 2;
+	static const int MAX_STEP_COUNT = 20;
+	static const int ANT_COUNT = 100000;
 
 public:
 	static uint64_t GetCycle(void)

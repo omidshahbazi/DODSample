@@ -67,8 +67,6 @@ void Renderer::Present(void)
 	if (window == nullptr)
 		return;
 
-	SDL_UnlockTexture(target);
-
 	SDL_Event e;
 	while (SDL_PollEvent(&e) > 0)
 	{
@@ -83,6 +81,8 @@ void Renderer::Present(void)
 				m_IsWindowOpen = false;
 		}
 	}
+
+	SDL_UnlockTexture(target);
 
 	SDL_RenderCopy(renderer, target, NULL, &destinationRect);
 

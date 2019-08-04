@@ -19,5 +19,5 @@ public:
 	}
 
 protected:
-	std::vector<OODAntOptimized*> m_Ants;
+	OODAntOptimized* m_Ants;
 };

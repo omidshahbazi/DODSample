@@ -19,5 +19,5 @@ public:
 	}
 
 protected:
-	std::vector<DODAntData> m_AntsData;
+	DODAntData * m_AntsData;
 };
