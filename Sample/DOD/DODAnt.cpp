@@ -12,7 +12,7 @@ void DODAntsLogic::Update(DODAntData *Data, int Index, int Count)
 
 		antData.Position += antData.Step;
 
-		if (antData.StepCount-- == 0)
+		if (--antData.StepCount == 0)
 			DODAntsLogic::FindNewTarget(antData);
 	}
 }

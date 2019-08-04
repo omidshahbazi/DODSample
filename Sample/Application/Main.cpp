@@ -13,7 +13,7 @@
 #define CALCULATE_AND_PRINT_FPS() \
 	float totalTime = (Utils::GetTime() - startTime); \
 	float avgFPS = frameCount / totalTime; \
-	std::cout << std::endl << "Average FPS: " << avgFPS << " - Average Frame Time: " << (totalTime / avgFPS) * 1000 << "ms" << std::endl << std::endl;
+	std::cout << std::endl << "Average FPS: " << avgFPS << " - Average Frame Time: " << (totalTime / frameCount) * 1000 << "ms" << std::endl << std::endl;
 
 void JustUpdate(Renderer &Renderer, Simulation &Simulation)
 {

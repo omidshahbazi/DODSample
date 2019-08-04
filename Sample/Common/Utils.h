@@ -76,7 +76,7 @@ public:
 
 //\t\tCycle
 #define PRINT_PROFILER_TABLE_COLUMN() \
-	std::cout << "Place\t\tTime(ms)\t\tTime/Ant(ms)" << std::endl; \
+	std::cout << "Place\t\tTime(ms)\tTime/Ant(ms)" << std::endl; \
 	std::cout << "================================================" << std::endl;
 
 #define BEGIN_PROFILE(Name) \
