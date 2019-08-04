@@ -68,13 +68,15 @@ public:
 
 	static void PrintProfile(const char *Name, uint64_t Cycles, __int64 Clock)
 	{
-		std::cout << Name << "\t\t" << Cycles << "\t\t" << (double)(Clock * 1000.0F / GetFrequency()) << std::endl;
+		double time = (double)(Clock * 1000.0F / GetFrequency());
+		std::cout << Name << "\t\t" << time << "\t\t" << (time / ANT_COUNT) << std::endl; //"\t\t" << Cycles <<
 		std::cout << "------------------------------------------------" << std::endl;
 	}
 };
 
+//\t\tCycle
 #define PRINT_PROFILER_TABLE_COLUMN() \
-	std::cout << "Place\t\tCycle\t\tTime(ms)" << std::endl; \
+	std::cout << "Place\t\tTime(ms)\t\tTime/Ant(ms)" << std::endl; \
 	std::cout << "================================================" << std::endl;
 
 #define BEGIN_PROFILE(Name) \
