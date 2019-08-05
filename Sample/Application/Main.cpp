@@ -20,11 +20,11 @@ void Loop(Renderer & Renderer, Simulation & Simulation)
 {
 	std::cout << std::endl;
 
-	if constexpr (DoUpdate && DoRender)
+	if(DoUpdate && DoRender)
 		std::cout << "Update And Render";
-	else	if constexpr (DoUpdate)
+	else if(DoUpdate)
 		std::cout << "Just Update";
-	else if constexpr (DoRender)
+	else if(DoRender)
 		std::cout << "Just Render";
 
 	std::cout << std::endl;
@@ -38,14 +38,14 @@ void Loop(Renderer & Renderer, Simulation & Simulation)
 	while (Renderer.IsWindowOpen())
 	{
 		BEGIN_PROFILE_COLLECT(Update);
-		if constexpr (DoUpdate)
+		if(DoUpdate)
 			Simulation.Update();
 		END_PROFILE_COLLECT(Update);
 
 		BEGIN_PROFILE_COLLECT(Render);
 		Renderer.Clear();
 
-		if constexpr (DoRender)
+		if(DoRender)
 			Simulation.Render();
 
 		Renderer.Present();
@@ -59,7 +59,7 @@ void Loop(Renderer & Renderer, Simulation & Simulation)
 
 	CALCULATE_AND_PRINT_FPS();
 
-	if constexpr (!(DoUpdate && DoRender))
+	if(!(DoUpdate && DoRender))
 		Renderer.SetIsWindowOpen(true);
 }
 
