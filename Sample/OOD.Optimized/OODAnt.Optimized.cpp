@@ -11,9 +11,9 @@ void OODAntOptimized::Update(void)
 		FindNewTarget();
 }
 
-void OODAntOptimized::Render(Renderer *Renderer)
+void OODAntOptimized::Render(Renderer &Renderer)
 {
-	Renderer->SetPixel(m_Position.X, m_Position.Y);
+	Renderer.SetPixel(m_Position.X, m_Position.Y);
 }
 
 void OODAntOptimized::FindNewTarget(void)

@@ -18,11 +18,13 @@ void DODAntsLogic::Update(DODAntData *Data, int Index, int Count)
 
 void DODAntsLogic::Render(DODAntData *Data, int Count, Renderer *Renderer)
 {
+	::Renderer& ren = *Renderer;
+
 	for (int i = 0; i < Count; ++i)
 	{
 		DODAntData &antData = Data[i];
 
-		Renderer->SetPixel(antData.Position.X, antData.Position.Y);
+		ren.SetPixel(antData.Position.X, antData.Position.Y);
 	}
 }
 

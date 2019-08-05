@@ -16,7 +16,7 @@ public:
 
 	void Update(void);
 
-	void Render(Renderer *Renderer);
+	void Render(Renderer &Renderer);
 
 	const Vector2F &GetPosition(void) const
 	{

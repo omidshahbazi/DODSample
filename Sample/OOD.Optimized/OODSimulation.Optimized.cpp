@@ -25,8 +25,10 @@ void OODSimulationOptimized::Update(void)
 
 void OODSimulationOptimized::Render(void)
 {
+	Renderer& ren = *GetRenderer();
+
 	for (int i = 0; i < GetAntCount(); ++i)
 	{
-		m_Ants[i].Render(GetRenderer());
+		m_Ants[i].Render(ren);
 	}
 }
