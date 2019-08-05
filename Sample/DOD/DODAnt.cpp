@@ -1,5 +1,4 @@
 // DOD Sample
-#pragma once
 #include <DOD\DODAnt.h>
 #include <Common\Renderer.h>
 #include <Common\Utils.h>
