@@ -16,7 +16,7 @@
 	std::cout << std::endl << "Average FPS: " << avgFPS << " - Average Frame Time: " << (totalTime / frameCount) * 1000 << "ms" << std::endl << std::endl;
 
 template<bool DoUpdate, bool DoRender>
-void Step(Renderer & Renderer, Simulation & Simulation)
+void Loop(Renderer & Renderer, Simulation & Simulation)
 {
 	std::cout << std::endl;
 
@@ -80,11 +80,11 @@ void main(void)
 	PRINT_PROFILER_TABLE_COLUMN();
 	END_PROFILE(Init);
 
-	Step<true, false>(renderer, simulation);
+	Loop<true, false>(renderer, simulation);
 
-	Step<false, true>(renderer, simulation);
+	Loop<false, true>(renderer, simulation);
 
-	Step<true, true>(renderer, simulation);
+	Loop<true, true>(renderer, simulation);
 
 	renderer.Shutdown();
 
