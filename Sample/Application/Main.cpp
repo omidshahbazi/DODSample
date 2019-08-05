@@ -15,9 +15,19 @@
 	float avgFPS = frameCount / totalTime; \
 	std::cout << std::endl << "Average FPS: " << avgFPS << " - Average Frame Time: " << (totalTime / frameCount) * 1000 << "ms" << std::endl << std::endl;
 
-void JustUpdate(Renderer &Renderer, Simulation &Simulation)
+template<bool DoUpdate, bool DoRender>
+void Step(Renderer & Renderer, Simulation & Simulation)
 {
-	std::cout << std::endl << "JustUpdate" << std::endl;
+	std::cout << std::endl;
+
+	if constexpr (DoUpdate && DoRender)
+		std::cout << "Update And Render";
+	else	if constexpr (DoUpdate)
+		std::cout << "Just Update";
+	else if constexpr (DoRender)
+		std::cout << "Just Render";
+
+	std::cout << std::endl;
 
 	DECLARE_FPS_COUNTER();
 
@@ -28,43 +38,15 @@ void JustUpdate(Renderer &Renderer, Simulation &Simulation)
 	while (Renderer.IsWindowOpen())
 	{
 		BEGIN_PROFILE_COLLECT(Update);
-		Simulation.Update();
-		END_PROFILE_COLLECT(Update);
-
-		BEGIN_PROFILE_COLLECT(Render);
-		Renderer.Present();
-		END_PROFILE_COLLECT(Render);
-
-		++frameCount;
-	}
-
-	END_PROFILE_COLLECTOR(Update);
-	END_PROFILE_COLLECTOR(Render);
-
-	CALCULATE_AND_PRINT_FPS();
-
-	Renderer.SetIsWindowOpen(true);
-}
-
-void JustRender(Renderer &Renderer, Simulation &Simulation)
-{
-	std::cout << std::endl << "JustRender" << std::endl;
-
-	DECLARE_FPS_COUNTER();
-
-	PRINT_PROFILER_TABLE_COLUMN();
-	BEGIN_PROFILE_COLLECTOR(Update);
-	BEGIN_PROFILE_COLLECTOR(Render);
-
-	while (Renderer.IsWindowOpen())
-	{
-		BEGIN_PROFILE_COLLECT(Update);
+		if constexpr (DoUpdate)
+			Simulation.Update();
 		END_PROFILE_COLLECT(Update);
 
 		BEGIN_PROFILE_COLLECT(Render);
 		Renderer.Clear();
 
-		Simulation.Render();
+		if constexpr (DoRender)
+			Simulation.Render();
 
 		Renderer.Present();
 		END_PROFILE_COLLECT(Render);
@@ -77,40 +59,8 @@ void JustRender(Renderer &Renderer, Simulation &Simulation)
 
 	CALCULATE_AND_PRINT_FPS();
 
-	Renderer.SetIsWindowOpen(true);
-}
-
-void UpdateAndRender(Renderer &Renderer, Simulation &Simulation)
-{
-	std::cout << std::endl << "UpdateAndRender" << std::endl;
-
-	DECLARE_FPS_COUNTER();
-
-	PRINT_PROFILER_TABLE_COLUMN();
-	BEGIN_PROFILE_COLLECTOR(Update);
-	BEGIN_PROFILE_COLLECTOR(Render);
-
-	while (Renderer.IsWindowOpen())
-	{
-		BEGIN_PROFILE_COLLECT(Update);
-		Simulation.Update();
-		END_PROFILE_COLLECT(Update);
-
-		BEGIN_PROFILE_COLLECT(Render);
-		Renderer.Clear();
-
-		Simulation.Render();
-
-		Renderer.Present();
-		END_PROFILE_COLLECT(Render);
-
-		++frameCount;
-	}
-
-	END_PROFILE_COLLECTOR(Update);
-	END_PROFILE_COLLECTOR(Render);
-
-	CALCULATE_AND_PRINT_FPS();
+	if constexpr (!(DoUpdate && DoRender))
+		Renderer.SetIsWindowOpen(true);
 }
 
 void main(void)
@@ -123,7 +73,6 @@ void main(void)
 	OODSimulation simulation(&renderer, Utils::ANT_COUNT);
 	//OODSimulationOptimized simulation(&renderer, Utils::ANT_COUNT);
 	//DODSimulation simulation(&renderer, Utils::ANT_COUNT);
-
 	//DODSimulationMultithreaded simulation(&renderer, Utils::ANT_COUNT);
 
 	std::cout << simulation.GetName() << " is running for " << Utils::ANT_COUNT << " ant(s)" << std::endl << std::endl;
@@ -131,11 +80,11 @@ void main(void)
 	PRINT_PROFILER_TABLE_COLUMN();
 	END_PROFILE(Init);
 
-	JustUpdate(renderer, simulation);
+	Step<true, false>(renderer, simulation);
 
-	JustRender(renderer, simulation);
+	Step<false, true>(renderer, simulation);
 
-	UpdateAndRender(renderer, simulation);
+	Step<true, true>(renderer, simulation);
 
 	renderer.Shutdown();
 
