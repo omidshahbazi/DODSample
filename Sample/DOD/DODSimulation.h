@@ -19,5 +19,6 @@ public:
 	}
 
 protected:
-	DODAntData * m_AntsData;
+	DODAntData1 * m_AntsData1;
+	DODAntData2 * m_AntsData2;
 };

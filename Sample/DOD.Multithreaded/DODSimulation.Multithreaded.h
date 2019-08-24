@@ -12,7 +12,8 @@ private:
 	struct UpdateInfo
 	{
 	public:
-		DODAntData* Ants;
+		DODAntData1* Ants1;
+		DODAntData2* Ants2;
 		int Count;
 		std::atomic<bool> ReadyToStart;
 		std::atomic<bool> IsDone;
