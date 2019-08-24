@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Common">
+      <UniqueIdentifier>{2c272824-a77e-45e9-8468-db25b8adfec4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application">
+      <UniqueIdentifier>{20a7a005-7366-4021-8866-b53bad5dceb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OOD">
+      <UniqueIdentifier>{9cbfa8c5-8326-4fd7-823d-e5c66326850f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DOD">
+      <UniqueIdentifier>{1e4a3e4f-01c0-4336-8d24-5688b0245bff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OOD.Optimized">
+      <UniqueIdentifier>{f3b91a57-8e52-4845-8ff8-5b4a34c690fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DOD.Multithreaded">
+      <UniqueIdentifier>{8c41dfd8-10d5-4d7c-a740-ead6bc28225e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Application\Main.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Renderer.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="OOD\OODSimulation.cpp">
+      <Filter>OOD</Filter>
+    </ClCompile>
+    <ClCompile Include="DOD\DODSimulation.cpp">
+      <Filter>DOD</Filter>
+    </ClCompile>
+    <ClCompile Include="OOD\OODAnt.cpp">
+      <Filter>OOD</Filter>
+    </ClCompile>
+    <ClCompile Include="DOD\DODAnt.cpp">
+      <Filter>DOD</Filter>
+    </ClCompile>
+    <ClCompile Include="DOD.Multithreaded\DODSimulation.Multithreaded.cpp">
+      <Filter>DOD.Multithreaded</Filter>
+    </ClCompile>
+    <ClCompile Include="OOD.Optimized\OODAnt.Optimized.cpp">
+      <Filter>OOD.Optimized</Filter>
+    </ClCompile>
+    <ClCompile Include="OOD.Optimized\OODSimulation.Optimized.cpp">
+      <Filter>OOD.Optimized</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Common\Renderer.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Vector2.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="OOD\OODSimulation.h">
+      <Filter>OOD</Filter>
+    </ClInclude>
+    <ClInclude Include="DOD\DODAnt.h">
+      <Filter>DOD</Filter>
+    </ClInclude>
+    <ClInclude Include="DOD\DODSimulation.h">
+      <Filter>DOD</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Utils.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="DOD.Multithreaded\DODSimulation.Multithreaded.h">
+      <Filter>DOD.Multithreaded</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Simulation.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="OOD\OODAnt.h">
+      <Filter>OOD</Filter>
+    </ClInclude>
+    <ClInclude Include="OOD.Optimized\OODAnt.Optimized.h">
+      <Filter>OOD.Optimized</Filter>
+    </ClInclude>
+    <ClInclude Include="OOD.Optimized\OODSimulation.Optimized.h">
+      <Filter>OOD.Optimized</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
