@@ -22,7 +22,10 @@
     <ClCompile Include="Application\Main.cpp" />
     <ClCompile Include="Common\Renderer.cpp" />
     <ClCompile Include="DOD.Multithreaded\DODSimulation.Multithreaded.cpp" />
-    <ClCompile Include="DOD\DODAnt.cpp" />
+    <ClCompile Include="DOD\DODAnt.cpp">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)ParadigmSample\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)ParadigmSample\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
     <ClCompile Include="DOD\DODSimulation.cpp" />
     <ClCompile Include="OOD.Optimized\OODAnt.Optimized.cpp" />
     <ClCompile Include="OOD.Optimized\OODSimulation.Optimized.cpp" />
