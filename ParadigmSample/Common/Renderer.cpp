@@ -26,8 +26,6 @@ void Renderer::Initialize(const char *Title, int Width, int Height)
 
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
-	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
 	target = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGB888, SDL_TEXTUREACCESS_STREAMING, Width, Height);
 
 	SDL_PixelFormat pixelFormat;

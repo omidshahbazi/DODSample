@@ -15,58 +15,53 @@ public:
 	static const int ANT_COUNT = 1000000;
 
 public:
-	static uint64_t GetCycle(void)
-	{
-		return __rdtsc();
-	}
-
-	static __int64 GetFrequency(void)
+	static __forceinline int64_t GetFrequency(void)
 	{
 		static LARGE_INTEGER var;
 		QueryPerformanceFrequency(&var);
 		return var.QuadPart;
 	}
 
-	static __int64 GetClock(void)
+	static __forceinline int64_t GetClock(void)
 	{
 		static LARGE_INTEGER clock;
 		QueryPerformanceCounter(&clock);
 		return clock.QuadPart;
 	}
 
-	static float GetTimestamp(void)
+	static __forceinline float GetTimestamp(void)
 	{
-		static __int64 frequency = GetFrequency();
+		static int64_t frequency = GetFrequency();
 
-		static __int64 clock = 0;
+		static int64_t clock = 0;
 		clock = GetClock();
 
 		return (float(clock * 1000000) / frequency) / 1000000;
 	}
 
-	static float GetTime(void)
+	static __forceinline float GetTime(void)
 	{
 		static float start = GetTimestamp();
 
 		return GetTimestamp() - start;
 	}
 
-	static float GetRandom(float Min, float Max)
+	static __forceinline float GetRandom(float Min, float Max)
 	{
 		return Min + (rand() % (int)(Max - Min));
 	}
 
-	static int GetRandom(int Min, int Max)
+	static __forceinline int GetRandom(int Min, int Max)
 	{
 		return Min + (rand() % (int)(Max - Min));
 	}
 
-	static Vector2F GetRandom(float MinX, float MaxX, float MinY, float MaxY)
+	static __forceinline Vector2F GetRandom(float MinX, float MaxX, float MinY, float MaxY)
 	{
 		return { GetRandom(MinX, MaxX), GetRandom(MinY, MaxY) };
 	}
 
-	static void PrintProfile(const char *Name, uint64_t Cycles, __int64 Clock)
+	static __forceinline void PrintProfile(const char *Name, uint64_t Cycles, int64_t Clock)
 	{
 		double time = (double)(Clock * 1000.0F / GetFrequency());
 		std::cout << Name << "\t\t" << time << "\t\t" << (time / ANT_COUNT) << std::endl; //"\t\t" << Cycles <<
@@ -80,12 +75,12 @@ public:
 	std::cout << "================================================" << std::endl;
 
 #define BEGIN_PROFILE(Name) \
-	__int64 __BeginClock__##Name = Utils::GetClock(); \
-	uint64_t __BeginCycle__##Name = Utils::GetCycle();
+	int64_t __BeginClock__##Name = Utils::GetClock(); \
+	uint64_t __BeginCycle__##Name = ReadTimeStampCounter();
 
 #define END_PROFILE(Name) \
-	uint64_t __TotalCycle__##Name = Utils::GetCycle() - __BeginCycle__##Name; \
-	__int64 __TotalClock__##Name = Utils::GetClock() - __BeginClock__##Name; \
+	uint64_t __TotalCycle__##Name = ReadTimeStampCounter() - __BeginCycle__##Name; \
+	int64_t __TotalClock__##Name = Utils::GetClock() - __BeginClock__##Name; \
 	Utils::PrintProfile(#Name, __TotalCycle__##Name, __TotalClock__##Name);
 
 #define BEGIN_PROFILE_COLLECTOR(Name) \
@@ -96,11 +91,11 @@ public:
 	uint64_t __CollectorBeginClock__##Name = 0;
 
 #define BEGIN_PROFILE_COLLECT(Name) \
-	uint64_t __CollectorBeginCycle__##Name = Utils::GetCycle(); \
-	__int64 __CollectorBeginClock__##Name = Utils::GetClock();
+	uint64_t __CollectorBeginCycle__##Name = ReadTimeStampCounter(); \
+	int64_t __CollectorBeginClock__##Name = Utils::GetClock();
 
 #define END_PROFILE_COLLECT(Name) \
-	__CollectorTotalCycle__##Name += Utils::GetCycle() - __CollectorBeginCycle__##Name; \
+	__CollectorTotalCycle__##Name += ReadTimeStampCounter() - __CollectorBeginCycle__##Name; \
 	__CollectorTotalClock__##Name += Utils::GetClock() - __CollectorBeginClock__##Name; \
 	__CollectorSampleCount__##Name++;
 

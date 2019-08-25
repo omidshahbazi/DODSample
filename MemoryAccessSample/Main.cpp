@@ -2,24 +2,33 @@
 #include <memory>
 #include <Common\Utils.h>
 
-const long FUNCTION_CAL_COUNT = 1024;
-const __int64 NUMBER_COUNT = 1024 * 1024 * 1024;
+typedef int ValueType;
 
-int GetRDTSC_Cycles(void)
+const int KILO = 1000;
+const int MEGA = KILO * 1000;
+const int GIGA = MEGA * 1000;
+const int KILOBYTE = 1024;
+const int MEGABYTE = KILOBYTE * 1024;
+const int GIGABYTE = MEGABYTE * 1024;
+const int FUNCTION_CAL_COUNT = 10000;
+const int64_t NUMBER_COUNT = GIGABYTE / sizeof(ValueType);
+const uint64_t SIZE_IN_BYTE = NUMBER_COUNT * sizeof(ValueType);
+
+uint64_t GetRDTSC_Cycles(void)
 {
 	uint64_t avgRDTSC = 0;
 
 	for (int i = 0; i < FUNCTION_CAL_COUNT; ++i)
 	{
-		uint64_t start = Utils::GetCycle();
-		Utils::GetCycle();
-		avgRDTSC += (Utils::GetCycle() - start) * 2;
+		uint64_t start = ReadTimeStampCounter();
+		ReadTimeStampCounter();
+		avgRDTSC += (ReadTimeStampCounter() - start) * 2;
 	}
 
 	return avgRDTSC / FUNCTION_CAL_COUNT;
 }
 
-int GetRand_Cycles(void)
+uint64_t GetRand_Cycles(void)
 {
 	uint64_t avgRDTSCCycle = GetRDTSC_Cycles();
 
@@ -27,53 +36,78 @@ int GetRand_Cycles(void)
 
 	for (int i = 0; i < FUNCTION_CAL_COUNT; ++i)
 	{
-		uint64_t start = Utils::GetCycle();
+		uint64_t start = ReadTimeStampCounter();
 		int a = rand() % (i + 1);
-		avgRDTSC += (Utils::GetCycle() - start) - avgRDTSCCycle;
+		avgRDTSC += (ReadTimeStampCounter() - start);
 	}
 
-	return avgRDTSC / FUNCTION_CAL_COUNT;
+	return (avgRDTSC / FUNCTION_CAL_COUNT) - avgRDTSCCycle;
 }
 
-void RandomMemoryAccess(int* Buffer)
+uint64_t RandomMemoryAccess(ValueType * Buffer)
 {
-	for (long i = 0; i < NUMBER_COUNT; ++i)
+	std::cout << "RandomMemoryAccess is Running" << std::endl;
+
+	uint64_t avgRDTSCCycle = GetRDTSC_Cycles();
+	uint64_t avgRandomCycle = GetRand_Cycles();
+
+	uint64_t startCycle = ReadTimeStampCounter();
+
+	for (int64_t i = 0; i < NUMBER_COUNT; ++i)
 	{
 		int index = (rand() % NUMBER_COUNT) - 1;
 
-		int& value = Buffer[index];
+		ValueType& value = Buffer[index];
 		value++;
 	}
+
+	uint64_t endCycle = ReadTimeStampCounter();
+
+	return (endCycle - startCycle) - avgRDTSCCycle - (avgRandomCycle * NUMBER_COUNT);
 }
 
-void SequentialMemoryAccess(int* Buffer)
+uint64_t SequentialMemoryAccess(ValueType * Buffer)
 {
-	for (long i = 0; i < NUMBER_COUNT; ++i)
+	std::cout << "SequentialMemoryAccess is Running" << std::endl;
+
+	uint64_t avgRDTSCCycle = GetRDTSC_Cycles();
+
+	uint64_t startCycle = ReadTimeStampCounter();
+
+	for (int64_t i = 0; i < NUMBER_COUNT; ++i)
 	{
-		int& value1 = Buffer[i];
+		ValueType& value1 = Buffer[i];
 		value1++;
 	}
+
+	uint64_t endCycle = ReadTimeStampCounter();
+
+	return (endCycle - startCycle) - avgRDTSCCycle;
+}
+
+void Benchmark(uint64_t(*Function)(ValueType*), ValueType * Buffer)
+{
+	static uint64_t cpuFreq = Utils::GetFrequency();
+
+	uint64_t elapsedCycles = Function(Buffer);
+
+	double totalTimeInMillisec = elapsedCycles / (double)cpuFreq;
+	double eachByteInMillisec = (double)totalTimeInMillisec / SIZE_IN_BYTE;
+	double megabytePerSecond = (1000 / eachByteInMillisec) / MEGABYTE;
+
+	std::cout << "Cycles: " << (elapsedCycles / GIGA) << "G Time: " << totalTimeInMillisec << "ms Speed: " << megabytePerSecond << "mb/s" << std::endl << std::endl;
 }
 
 void main(void)
 {
-	int avgRDTSCCycle = GetRDTSC_Cycles();
-	int avgRandomCycle = GetRand_Cycles();
+	std::cout << "ElementSize: " << sizeof(ValueType) << " Count: " << NUMBER_COUNT << " Size: " << (SIZE_IN_BYTE / GIGABYTE) << "gb CPU-Freq.:" << (Utils::GetFrequency() / (float)MEGA) << "GHz" << std::endl << std::endl;
 
-	__int64 cpuFreq = Utils::GetFrequency();
-
-
-
-	const long long SIZE_IN_BYTE = NUMBER_COUNT * sizeof(int);
-
-	int* buffer = reinterpret_cast<int*>(malloc(SIZE_IN_BYTE));
+	ValueType * buffer = reinterpret_cast<ValueType*>(malloc(SIZE_IN_BYTE));
 	memset(buffer, 0, SIZE_IN_BYTE);
 
-	uint64_t start = Utils::GetClock();
-	RandomMemoryAccess(buffer);
-	float totalTime = ((Utils::GetClock() - start) - avgRDTSCCycle - (avgRandomCycle * NUMBER_COUNT)) / (float)cpuFreq;
+	Benchmark(&RandomMemoryAccess, buffer);
 
-	start = Utils::GetClock();
-	SequentialMemoryAccess(buffer);
-	totalTime = ((Utils::GetClock() - start) - avgRDTSCCycle) / (float)cpuFreq;
+	Benchmark(&SequentialMemoryAccess, buffer);
+
+	system("pause");
 }

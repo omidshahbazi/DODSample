@@ -70,10 +70,10 @@ void main(void)
 	Renderer renderer;
 	renderer.Initialize("DOD Sample", Utils::WIDTH, Utils::HEIGHT);
 
-	//OODSimulation simulation(&renderer, Utils::ANT_COUNT);
+	OODSimulation simulation(&renderer, Utils::ANT_COUNT);
 	//OODSimulationOptimized simulation(&renderer, Utils::ANT_COUNT);
 	//DODSimulation simulation(&renderer, Utils::ANT_COUNT);
-	DODSimulationMultithreaded simulation(&renderer, Utils::ANT_COUNT);
+	//DODSimulationMultithreaded simulation(&renderer, Utils::ANT_COUNT);
 
 	std::cout << simulation.GetName() << " is running for " << Utils::ANT_COUNT << " ant(s)" << std::endl << std::endl;
 
