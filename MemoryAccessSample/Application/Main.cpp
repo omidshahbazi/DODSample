@@ -100,7 +100,7 @@ void Benchmark(uint64_t(*Function)(ValueType*), ValueType * Buffer)
 
 void main(void)
 {
-	std::cout << "ElementSize: " << sizeof(ValueType) << " Count: " << NUMBER_COUNT << " Size: " << (SIZE_IN_BYTE / GIGABYTE) << "gb CPU-Freq.:" << (Utils::GetFrequency() / (float)MEGA) << "GHz" << std::endl << std::endl;
+	std::cout << "ElementSize: " << sizeof(ValueType) << "b Count: " << NUMBER_COUNT << " Size: " << (SIZE_IN_BYTE / GIGABYTE) << "gb CPU-Freq.:" << (Utils::GetFrequency() / (float)MEGA) << "GHz" << std::endl << std::endl;
 
 	ValueType * buffer = reinterpret_cast<ValueType*>(malloc(SIZE_IN_BYTE));
 	memset(buffer, 0, SIZE_IN_BYTE);
