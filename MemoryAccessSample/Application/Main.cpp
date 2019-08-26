@@ -1,6 +1,7 @@
 // DOD Sample
 #include <memory>
 #include <Common\Utils.h>
+#include <functional>
 
 typedef int ValueType;
 
@@ -14,7 +15,7 @@ const int FUNCTION_CAL_COUNT = 10000;
 const int64_t NUMBER_COUNT = GIGABYTE / sizeof(ValueType);
 const uint64_t SIZE_IN_BYTE = NUMBER_COUNT * sizeof(ValueType);
 
-uint64_t GetRDTSC_Cycles(void)
+uint64_t GetRDTSCOverhead(void)
 {
 	uint64_t avgRDTSC = 0;
 
@@ -28,9 +29,9 @@ uint64_t GetRDTSC_Cycles(void)
 	return avgRDTSC / FUNCTION_CAL_COUNT;
 }
 
-uint64_t GetRand_Cycles(void)
+uint64_t GetRandomIndexOverhead(void)
 {
-	uint64_t avgRDTSCCycle = GetRDTSC_Cycles();
+	uint64_t avgRDTSCCycle = GetRDTSCOverhead();
 
 	uint64_t avgRDTSC = 0;
 
@@ -46,10 +47,10 @@ uint64_t GetRand_Cycles(void)
 
 uint64_t RandomMemoryAccess(ValueType * Buffer)
 {
-	std::cout << "RandomMemoryAccess is Running" << std::endl;
+	uint64_t rdtscOverhead = GetRDTSCOverhead();
+	uint64_t randomIndexOverhead = GetRandomIndexOverhead();
 
-	uint64_t avgRDTSCCycle = GetRDTSC_Cycles();
-	uint64_t avgRandomCycle = GetRand_Cycles();
+	std::cout << "RandomMemoryAccess is Running" << std::endl;
 
 	uint64_t startCycle = ReadTimeStampCounter();
 
@@ -63,14 +64,14 @@ uint64_t RandomMemoryAccess(ValueType * Buffer)
 
 	uint64_t endCycle = ReadTimeStampCounter();
 
-	return (endCycle - startCycle) - avgRDTSCCycle - (avgRandomCycle * NUMBER_COUNT);
+	return (endCycle - startCycle) - rdtscOverhead - (randomIndexOverhead * NUMBER_COUNT);
 }
 
 uint64_t SequentialMemoryAccess(ValueType * Buffer)
 {
-	std::cout << "SequentialMemoryAccess is Running" << std::endl;
+	uint64_t rdtscOverhead = GetRDTSCOverhead();
 
-	uint64_t avgRDTSCCycle = GetRDTSC_Cycles();
+	std::cout << "SequentialMemoryAccess is Running" << std::endl;
 
 	uint64_t startCycle = ReadTimeStampCounter();
 
@@ -82,18 +83,18 @@ uint64_t SequentialMemoryAccess(ValueType * Buffer)
 
 	uint64_t endCycle = ReadTimeStampCounter();
 
-	return (endCycle - startCycle) - avgRDTSCCycle;
+	return (endCycle - startCycle) - rdtscOverhead;
 }
 
-void Benchmark(uint64_t(*Function)(ValueType*), ValueType * Buffer)
+void Benchmark(std::function<uint64_t(ValueType*)> Function, ValueType * Buffer)
 {
 	static uint64_t cpuFreq = Utils::GetFrequency();
 
 	uint64_t elapsedCycles = Function(Buffer);
 
-	double totalTimeInMillisec = elapsedCycles / (double)cpuFreq;
-	double eachByteInMillisec = (double)totalTimeInMillisec / SIZE_IN_BYTE;
-	double megabytePerSecond = (1000 / eachByteInMillisec) / MEGABYTE;
+	long double totalTimeInMillisec = elapsedCycles / (double)cpuFreq;
+	long double eachByteInMillisec = (long double)totalTimeInMillisec / SIZE_IN_BYTE;
+	long double megabytePerSecond = (1000 / eachByteInMillisec) / MEGABYTE;
 
 	std::cout << "Cycles: " << (elapsedCycles / GIGA) << "G Time: " << totalTimeInMillisec << "ms Speed: " << megabytePerSecond << "mb/s" << std::endl << std::endl;
 }
