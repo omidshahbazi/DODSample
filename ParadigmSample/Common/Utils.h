@@ -10,8 +10,8 @@ class Utils
 public:
 	static const int WIDTH = 800;
 	static const int HEIGHT = 600;
-	static const int MIN_STEP_COUNT = 2;
-	static const int MAX_STEP_COUNT = 20;
+	static const int MIN_STEP_COUNT = 10;
+	static const int MAX_STEP_COUNT = 200;
 	static const int ANT_COUNT = 1000000;
 
 public:
