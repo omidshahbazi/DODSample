@@ -92,8 +92,8 @@ uint64_t SequentialMemoryAccess(ValueType* Buffer)
 
 	for (int64_t i = 0; i < NUMBER_COUNT; ++i)
 	{
-		ValueType& value1 = Buffer[i];
-		value1++;
+		ValueType& value = Buffer[i];
+		value++;
 	}
 
 	uint64_t endCycle = ReadTimeStampCounter();
